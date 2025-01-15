@@ -6,24 +6,33 @@
 
 All exceptions inherit from class `json::exception` (which in turn inherits from `std::exception`). It is used as the base class for all exceptions thrown by the `basic_json` class. This class can hence be used as "wildcard" to catch exceptions.
 
-```plantuml
-std::exception <|-- json::exception
-json::exception <|-- json::parse_error
-json::exception <|-- json::invalid_iterator
-json::exception <|-- json::type_error
-json::exception <|-- json::out_of_range
-json::exception <|-- json::other_error
+``` mermaid
+classDiagram
+  direction LR
+    class `std::exception` {
+        <<interface>>
+    }
 
-interface std::exception {}
+    class `json::exception` {
+        +const int id
+        +const char* what() const
+    }
 
-class json::exception {
-    + const int id
-    + const char* what() const
-}
+    class `json::parse_error` {
+        +const std::size_t byte
+    }
 
-class json::parse_error {
-    + const std::size_t byte
-}
+    class `json::invalid_iterator`
+    class `json::type_error`
+    class `json::out_of_range`
+    class `json::other_error`
+
+    `std::exception` <|-- `json::exception`
+    `json::exception` <|-- `json::parse_error`
+    `json::exception` <|-- `json::invalid_iterator`
+    `json::exception` <|-- `json::type_error`
+    `json::exception` <|-- `json::out_of_range`
+    `json::exception` <|-- `json::other_error`
 ```
 
 ### Switch off exceptions
@@ -139,7 +148,7 @@ This error indicates a syntax error while deserializing a JSON text. The error m
     No input:
 
     ```
-    [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal
+    [json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON
     ```
 
     Control character was not escaped:
@@ -830,7 +839,7 @@ A parsed number could not be stored as without changing it to NaN or INF.
 
 ### json.exception.out_of_range.407
 
-UBJSON and BSON only support integer numbers up to 9223372036854775807.
+UBJSON only support integer numbers up to 9223372036854775807.
 
 !!! failure "Example message"
 

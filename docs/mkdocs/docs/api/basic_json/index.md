@@ -13,8 +13,8 @@ template<
     class NumberFloatType = double,
     template<typename U> class AllocatorType = std::allocator,
     template<typename T, typename SFINAE = void> class JSONSerializer = adl_serializer,
-    class BinaryType = std::vector<std::uint8_t,
-    class CustomBaseClass = void>
+    class BinaryType = std::vector<std::uint8_t>,
+    class CustomBaseClass = void
 >
 class basic_json;
 ```
@@ -42,7 +42,15 @@ class basic_json;
 
 ## Iterator invalidation
 
-Todo
+All operations that add values to an **array** ([`push_back`](push_back.md) , [`operator+=`](operator+=.md),
+[`emplace_back`](emplace_back.md), [`insert`](insert.md), and [`operator[]`](operator%5B%5D.md) for a non-existing
+index) can yield a reallocation, in which case all iterators (including the [`end()`](end.md) iterator) and all
+references to the elements are invalidated.
+
+For [`ordered_json`](../ordered_json.md), also all operations that add a value to an **object**
+([`push_back`](push_back.md), [`operator+=`](operator+=.md), [`emplace`](emplace.md), [`insert`](insert.md),
+[`update`](update.md), and [`operator[]`](operator%5B%5D.md) for a non-existing key) can yield a reallocation, in
+which case all iterators (including the [`end()`](end.md) iterator) and all references to the elements are invalidated.
 
 ## Requirements
 
@@ -73,7 +81,7 @@ The class satisfies the following concept requirements:
 - [EqualityComparable](https://en.cppreference.com/w/cpp/named_req/EqualityComparable): JSON values can be compared with
   `==`, see [`operator==`](operator_eq.md).
 - [LessThanComparable](https://en.cppreference.com/w/cpp/named_req/LessThanComparable): JSON values can be compared with
-  `<`, see [`operator<`](operator_le).
+  `<`, see [`operator<`](operator_le.md).
 - [Swappable](https://en.cppreference.com/w/cpp/named_req/Swappable): Any JSON lvalue or rvalue of can be swapped with
   any lvalue or rvalue of other compatible types, using unqualified function `swap`.
 - [NullablePointer](https://en.cppreference.com/w/cpp/named_req/NullablePointer): JSON values can be compared against
@@ -88,7 +96,7 @@ The class satisfies the following concept requirements:
 
 ## Member types
 
-- [**adl_serializer**](../adl_serializer) - the default serializer
+- [**adl_serializer**](../adl_serializer/index.md) - the default serializer
 - [**value_t**](value_t.md) - the JSON type enumeration
 - [**json_pointer**](../json_pointer/index.md) - JSON Pointer implementation
 - [**json_serializer**](json_serializer.md) - type of the serializer to for conversions from/to JSON

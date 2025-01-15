@@ -7,17 +7,19 @@
 [![Coverage Status](https://coveralls.io/repos/github/nlohmann/json/badge.svg?branch=develop)](https://coveralls.io/github/nlohmann/json?branch=develop)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/5550/badge.svg)](https://scan.coverity.com/projects/nlohmann-json)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e0d1a9d5d6fd46fcb655c4cb930bb3e8)](https://www.codacy.com/gh/nlohmann/json/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nlohmann/json&amp;utm_campaign=Badge_Grade)
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/nlohmann/json.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nlohmann/json/context:cpp)
+[![Cirrus CI](https://api.cirrus-ci.com/github/nlohmann/json.svg)](https://cirrus-ci.com/github/nlohmann/json)
 [![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/json.svg)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:json)
 [![Try online](https://img.shields.io/badge/try-online-blue.svg)](https://wandbox.org/permlink/1mp10JbaANo6FUc7)
 [![Documentation](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://json.nlohmann.me)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/nlohmann/json/master/LICENSE.MIT)
 [![GitHub Releases](https://img.shields.io/github/release/nlohmann/json.svg)](https://github.com/nlohmann/json/releases)
+[![Vcpkg Version](https://img.shields.io/vcpkg/v/nlohmann-json)](https://vcpkg.link/ports/nlohmann-json)
 [![Packaging status](https://repology.org/badge/tiny-repos/nlohmann-json.svg)](https://repology.org/project/nlohmann-json/versions)
 [![GitHub Downloads](https://img.shields.io/github/downloads/nlohmann/json/total)](https://github.com/nlohmann/json/releases)
 [![GitHub Issues](https://img.shields.io/github/issues/nlohmann/json.svg)](https://github.com/nlohmann/json/issues)
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/nlohmann/json.svg)](https://isitmaintained.com/project/nlohmann/json "Average time to resolve an issue")
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/289/badge)](https://bestpractices.coreinfrastructure.org/projects/289)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/nlohmann/json/badge)](https://scorecard.dev/viewer/?uri=github.com/nlohmann/json)
 [![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsors-ff69b4)](https://github.com/sponsors/nlohmann)
 [![REUSE status](https://api.reuse.software/badge/github.com/nlohmann/json)](https://api.reuse.software/info/github.com/nlohmann/json)
 [![Discord](https://img.shields.io/discord/1003743314341793913)](https://discord.gg/6mrGXKvX7y)
@@ -38,6 +40,7 @@
   - [Conversions to/from arbitrary types](#arbitrary-types-conversions)
   - [Specializing enum conversion](#specializing-enum-conversion)
   - [Binary formats (BSON, CBOR, MessagePack, UBJSON, and BJData)](#binary-formats-bson-cbor-messagepack-ubjson-and-bjdata)
+- [Customers](#customers)
 - [Supported compilers](#supported-compilers)
 - [Integration](#integration)
   - [CMake](#cmake)
@@ -50,6 +53,7 @@
 - [Projects using JSON for Modern C++](#projects-using-json-for-modern-c)
 - [Notes](#notes)
 - [Execute unit tests](#execute-unit-tests)
+
 
 ## Design goals
 
@@ -74,9 +78,10 @@ See the [contribution guidelines](https://github.com/nlohmann/json/blob/master/.
 
 You can sponsor this library at [GitHub Sponsors](https://github.com/sponsors/nlohmann).
 
-### :office: Corporate Sponsor
+### :raising_hand: Priority Sponsor
 
-[![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Codacy-logo-black.svg/320px-Codacy-logo-black.svg.png)](https://github.com/codacy/About)
+- [Martti Laine](https://github.com/codeclown)
+- [Paul Harrington](https://github.com/phrrngtn)
 
 ### :label: Named Sponsors
 
@@ -85,8 +90,16 @@ You can sponsor this library at [GitHub Sponsors](https://github.com/sponsors/nl
 - [Steve Sperandeo](https://github.com/homer6)
 - [Robert Jefe Lindstädt](https://github.com/eljefedelrodeodeljefe)
 - [Steve Wagner](https://github.com/ciroque)
+- [Lion Yang](https://github.com/LionNatsu)
+
+### Further support
+
+The development of the library is further supported by JetBrains by providing free access to their IDE tools.
+
+[![JetBrains logo.](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)](https://jb.gg/OpenSourceSupport)
 
 Thanks everyone!
+
 
 ## Support
 
@@ -99,6 +112,7 @@ Thanks everyone!
 :bug: If you found a **bug**, please check the [**FAQ**](https://json.nlohmann.me/home/faq/) if it is a known issue or the result of a design decision. Please also have a look at the [**issue list**](https://github.com/nlohmann/json/issues) before you [**create a new issue**](https://github.com/nlohmann/json/issues/new/choose). Please provide as much information as possible to help us understand and reproduce your issue.
 
 There is also a [**docset**](https://github.com/Kapeli/Dash-User-Contributions/tree/master/docsets/JSON_for_Modern_C%2B%2B) for the documentation browsers [Dash](https://kapeli.com/dash), [Velocity](https://velocity.silverlakesoftware.com), and [Zeal](https://zealdocs.org) that contains the full [documentation](https://json.nlohmann.me) as offline resource.
+
 
 ## Examples
 
@@ -300,7 +314,7 @@ Note the difference between serialization and assignment:
 json j_string = "this is a string";
 
 // retrieve the string value
-auto cpp_string = j_string.get<std::string>();
+auto cpp_string = j_string.template get<std::string>();
 // retrieve the string value (alternative when a variable already exists)
 std::string cpp_string2;
 j_string.get_to(cpp_string2);
@@ -309,7 +323,7 @@ j_string.get_to(cpp_string2);
 std::string serialized_string = j_string.dump();
 
 // output of original string
-std::cout << cpp_string << " == " << cpp_string2 << " == " << j_string.get<std::string>() << '\n';
+std::cout << cpp_string << " == " << cpp_string2 << " == " << j_string.template get<std::string>() << '\n';
 // output of serialized value
 std::cout << j_string << " == " << serialized_string << std::endl;
 ```
@@ -383,7 +397,7 @@ struct MyIterator {
     using iterator_category = std::input_iterator_tag;
 
     MyIterator& operator++() {
-        MyContainer.advance();
+        target->advance();
         return *this;
     }
 
@@ -392,7 +406,7 @@ struct MyIterator {
     }
 
     reference operator*() const {
-        return target.get_current();
+        return target->get_current();
     }
 
     MyContainer* target = nullptr;
@@ -482,7 +496,7 @@ for (auto& element : j) {
 }
 
 // getter/setter
-const auto tmp = j[0].get<std::string>();
+const auto tmp = j[0].template get<std::string>();
 j[1] = 42;
 bool foo = j.at(2);
 
@@ -690,7 +704,7 @@ You can switch off implicit conversions by defining `JSON_USE_IMPLICIT_CONVERSIO
 // strings
 std::string s1 = "Hello, world!";
 json js = s1;
-auto s2 = js.get<std::string>();
+auto s2 = js.template get<std::string>();
 // NOT RECOMMENDED
 std::string s3 = js;
 std::string s4;
@@ -699,7 +713,7 @@ s4 = js;
 // Booleans
 bool b1 = true;
 json jb = b1;
-auto b2 = jb.get<bool>();
+auto b2 = jb.template get<bool>();
 // NOT RECOMMENDED
 bool b3 = jb;
 bool b4;
@@ -708,7 +722,7 @@ b4 = jb;
 // numbers
 int i = 42;
 json jn = i;
-auto f = jn.get<double>();
+auto f = jn.template get<double>();
 // NOT RECOMMENDED
 double f2 = jb;
 double f3;
@@ -751,9 +765,9 @@ j["age"] = p.age;
 
 // convert from JSON: copy each value from the JSON object
 ns::person p {
-    j["name"].get<std::string>(),
-    j["address"].get<std::string>(),
-    j["age"].get<int>()
+    j["name"].template get<std::string>(),
+    j["address"].template get<std::string>(),
+    j["age"].template get<int>()
 };
 ```
 
@@ -770,7 +784,7 @@ std::cout << j << std::endl;
 // {"address":"744 Evergreen Terrace","age":60,"name":"Ned Flanders"}
 
 // conversion: json -> person
-auto p2 = j.get<ns::person>();
+auto p2 = j.template get<ns::person>();
 
 // that's it
 assert(p == p2);
@@ -797,13 +811,13 @@ namespace ns {
 ```
 
 That's all! When calling the `json` constructor with your type, your custom `to_json` method will be automatically called.
-Likewise, when calling `get<your_type>()` or `get_to(your_type&)`, the `from_json` method will be called.
+Likewise, when calling `template get<your_type>()` or `get_to(your_type&)`, the `from_json` method will be called.
 
 Some important things:
 
 * Those methods **MUST** be in your type's namespace (which can be the global namespace), or the library will not be able to locate them (in this example, they are in namespace `ns`, where `person` is defined).
 * Those methods **MUST** be available (e.g., proper headers must be included) everywhere you use these conversions. Look at [issue 1108](https://github.com/nlohmann/json/issues/1108) for errors that may occur otherwise.
-* When using `get<your_type>()`, `your_type` **MUST** be [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible). (There is a way to bypass this requirement described later.)
+* When using `template get<your_type>()`, `your_type` **MUST** be [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible). (There is a way to bypass this requirement described later.)
 * In function `from_json`, use function [`at()`](https://json.nlohmann.me/api/basic_json/at/) to access the object values rather than `operator[]`. In case a key does not exist, `at` throws an exception that you can handle, whereas `operator[]` exhibits undefined behavior.
 * You do not need to add serializers or deserializers for STL types like `std::vector`: the library already implements these.
 
@@ -888,8 +902,8 @@ namespace nlohmann {
             if (j.is_null()) {
                 opt = boost::none;
             } else {
-                opt = j.get<T>(); // same as above, but with
-                                  // adl_serializer<T>::from_json
+                opt = j.template get<T>(); // same as above, but with
+                                           // adl_serializer<T>::from_json
             }
         }
     };
@@ -916,7 +930,7 @@ namespace nlohmann {
         // note: the return type is no longer 'void', and the method only takes
         // one argument
         static move_only_type from_json(const json& j) {
-            return {j.get<int>()};
+            return {j.template get<int>()};
         }
 
         // Here's the catch! You must provide a to_json method! Otherwise, you
@@ -1020,11 +1034,11 @@ assert(j == "stopped");
 
 // json string to enum
 json j3 = "running";
-assert(j3.get<TaskState>() == TS_RUNNING);
+assert(j3.template get<TaskState>() == TS_RUNNING);
 
 // undefined json value to enum (where the first map entry above is the default)
 json jPi = 3.14;
-assert(jPi.get<TaskState>() == TS_INVALID );
+assert(jPi.template get<TaskState>() == TS_INVALID );
 ```
 
 Just as in [Arbitrary Type Conversions](#arbitrary-types-conversions) above,
@@ -1032,7 +1046,7 @@ Just as in [Arbitrary Type Conversions](#arbitrary-types-conversions) above,
 - It MUST be available (e.g., proper headers must be included) everywhere you use the conversions.
 
 Other Important points:
-- When using `get<ENUM_TYPE>()`, undefined JSON values will default to the first pair specified in your map. Select this default pair carefully.
+- When using `template get<ENUM_TYPE>()`, undefined JSON values will default to the first pair specified in your map. Select this default pair carefully.
 - If an enum or JSON value is specified more than once in your map, the first matching occurrence from the top of the map will be returned when converting to or from JSON.
 
 ### Binary formats (BSON, CBOR, MessagePack, UBJSON, and BJData)
@@ -1106,14 +1120,19 @@ binary.set_subtype(0x10);
 auto cbor = json::to_msgpack(j); // 0xD5 (fixext2), 0x10, 0xCA, 0xFE
 ```
 
+## Customers
+
+The library is used in multiple projects, applications, operating systems, etc. The list below is not exhaustive, but the result of an internet search. If you know further customers of the library, please let me know, see [contact](#contact).
+
+[![](docs/mkdocs/docs/images/customers.png)](https://json.nlohmann.me/home/customers/)
 
 ## Supported compilers
 
-Though it's 2022 already, the support for C++11 is still a bit sparse. Currently, the following compilers are known to work:
+Though it's 2024 already, the support for C++11 is still a bit sparse. Currently, the following compilers are known to work:
 
-- GCC 4.8 - 12.0 (and possibly later)
-- Clang 3.4 - 15.0 (and possibly later)
-- Apple Clang 9.1 - 13.1 (and possibly later)
+- GCC 4.8 - 14.2 (and possibly later)
+- Clang 3.4 - 20.0 (and possibly later)
+- Apple Clang 9.1 - 16.1 (and possibly later)
 - Intel C++ Compiler 17.0.2 (and possibly later)
 - Nvidia CUDA Compiler 11.0.221 (and possibly later)
 - Microsoft Visual C++ 2015 / Build Tools 14.0.25123.0 (and possibly later)
@@ -1140,52 +1159,68 @@ Please note:
 
 - Unsupported versions of GCC and Clang are rejected by `#error` directives. This can be switched off by defining `JSON_SKIP_UNSUPPORTED_COMPILER_CHECK`. Note that you can expect no support in this case.
 
-The following compilers are currently used in continuous integration at [AppVeyor](https://ci.appveyor.com/project/nlohmann/json), [Drone CI](https://cloud.drone.io/nlohmann/json), and [GitHub Actions](https://github.com/nlohmann/json/actions):
+The following compilers are currently used in continuous integration at [AppVeyor](https://ci.appveyor.com/project/nlohmann/json), [Cirrus CI](https://cirrus-ci.com/github/nlohmann/json), and [GitHub Actions](https://github.com/nlohmann/json/actions):
 
 | Compiler                                                                                               | Operating System   | CI Provider    |
 |--------------------------------------------------------------------------------------------------------|--------------------|----------------|
-| Apple Clang 11.0.3 (clang-1103.0.32.62);  Xcode 11.7                                                   | macOS 11.6.8       | GitHub Actions |
-| Apple Clang 12.0.0 (clang-1200.0.32.29);  Xcode 12.4                                                   | macOS 11.6.8       | GitHub Actions |
-| Apple Clang 12.0.5 (clang-1205.0.22.11);  Xcode 12.5.1                                                 | macOS 11.6.8       | GitHub Actions |
-| Apple Clang 13.0.0 (clang-1300.0.29.3);   Xcode 13.0                                                   | macOS 11.6.8       | GitHub Actions |
-| Apple Clang 13.0.0 (clang-1300.0.29.3);   Xcode 13.1                                                   | macOS 12.4         | GitHub Actions |
-| Apple Clang 13.0.0 (clang-1300.0.29.30);  Xcode 13.2.1                                                 | macOS 12.4         | GitHub Actions |
-| Apple Clang 13.1.6 (clang-1316.0.21.2.3); Xcode 13.3.1                                                 | macOS 12.4         | GitHub Actions |
-| Apple Clang 13.1.6 (clang-1316.0.21.2.5); Xcode 13.4.1                                                 | macOS 12.4         | GitHub Actions |
-| Clang 3.5.2                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 3.6.2                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 3.7.1                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 3.8.1                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 3.9.1                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 4.0.1                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 5.0.2                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 6.0.1                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 7.0.1                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 8.0.0                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 9.0.0                                                                                            | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 10.0.0                                                                                           | Ubuntu 20.04.3 LTS | GitHub Actions |
+| Apple Clang 14.0.0 (clang-1400.0.29.202); Xcode 14.1                                                   | macOS 13.7         | GitHub Actions |
+| Apple Clang 14.0.0 (clang-1400.0.29.202); Xcode 14.2                                                   | macOS 13.7         | GitHub Actions |
+| Apple Clang 14.0.3 (clang-1403.0.22.14.1); Xcode 14.3                                                  | macOS 13.7         | GitHub Actions |
+| Apple Clang 14.0.3 (clang-1403.0.22.14.1); Xcode 14.3.1                                                | macOS 13.7.1       | GitHub Actions |
+| Apple Clang 15.0.0 (clang-1500.0.40.1); Xcode 15.0.1                                                   | macOS 13.7         | GitHub Actions |
+| Apple Clang 15.0.0 (clang-1500.1.0.2.5); Xcode 15.1                                                    | macOS 13.7         | GitHub Actions |
+| Apple Clang 15.0.0 (clang-1500.1.0.2.5); Xcode 15.2                                                    | macOS 13.7         | GitHub Actions |
+| Apple Clang 15.0.0 (clang-1500.3.9.4); Xcode 15.3                                                      | macOS 14.7         | GitHub Actions |
+| Apple Clang 15.0.0 (clang-1500.3.9.4); Xcode 15.4                                                      | macOS 14.7         | GitHub Actions |
+| Apple Clang 16.0.0 (clang-1600.0.26.3); Xcode 16.0                                                     | macOS 15.0.1       | GitHub Actions |
+| Apple Clang 16.0.0 (clang-1600.0.26.4); Xcode 16.1                                                     | macOS 15.0.1       | GitHub Actions |
+| Clang 3.5.2                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 3.6.2                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 3.7.1                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 3.8.1                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 3.9.1                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 4.0.1                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 5.0.2                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 6.0.1                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 7.0.1                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 8.0.0                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 9.0.0                                                                                            | Ubuntu 22.04.1 LTS | GitHub Actions |
+| Clang 10.0.0                                                                                           | Ubuntu 22.04.1 LTS | GitHub Actions |
 | Clang 10.0.0 with GNU-like command-line                                                                | Windows-10.0.17763 | GitHub Actions |
 | Clang 11.0.0 with GNU-like command-line                                                                | Windows-10.0.17763 | GitHub Actions |
 | Clang 11.0.0 with MSVC-like command-line                                                               | Windows-10.0.17763 | GitHub Actions |
 | Clang 11.0.0                                                                                           | Ubuntu 20.04.3 LTS | GitHub Actions |
 | Clang 12.0.0                                                                                           | Ubuntu 20.04.3 LTS | GitHub Actions |
+| Clang 12.0.0 with GNU-like command-line                                                                | Windows-10.0.17763 | GitHub Actions |
 | Clang 13.0.0                                                                                           | Ubuntu 20.04.3 LTS | GitHub Actions |
+| Clang 13.0.0 with GNU-like command-line                                                                | Windows-10.0.17763 | GitHub Actions |
 | Clang 14.0.0                                                                                           | Ubuntu 20.04.3 LTS | GitHub Actions |
-| Clang 15.0.0 (15.0.0-++20220719071818+5fc621355110-1~exp1~20220719071918.324)                          | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 4.8.5 (Ubuntu 4.8.5-4ubuntu2)                                                                      | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 4.9.4                                                                                              | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 5.5.0                                                                                              | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 6.5.0                                                                                              | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 7.5.0                                                                                              | Ubuntu 20.04.3 LTS | GitHub Actions |
+| Clang 14.0.0 with GNU-like command-line                                                                | Windows-10.0.17763 | GitHub Actions |
+| Clang 15.0.0 with GNU-like command-line                                                                | Windows-10.0.17763 | GitHub Actions |
+| Clang 15.0.4                                                                                           | Ubuntu 20.04.3 LTS | GitHub Actions |
+| Clang 16.0.0 (16.0.0-++20221031071727+500876226c60-1~exp1~20221031071831.439)                          | Ubuntu 20.04.3 LTS | GitHub Actions |
+| Clang 16.0.6 (++20231112084702+7cbf1a259152-1~exp1~20231112084757.16)                                  | Ubuntu 20.04.1 LTS | GitHub Actions |
+| Clang 17.0.6 (++20231208085813+6009708b4367-1~exp1~20231208085906.81)                                  | Ubuntu 20.04.1 LTS | GitHub Actions |
+| Clang 18.1.8 (++20240731024826+3b5b5c1ec4a3-1~exp1~20240731144843.145)                                 | Ubuntu 20.04.1 LTS | GitHub Actions |
+| Clang 19.1.2 (++20241016063422+7ba7d8e2f7b6-1~exp1~20241016063541.55)                                  | Ubuntu 20.04.1 LTS | GitHub Actions |
+| Clang 20.0.0 (++20241022113049+f1ade1f874db-1~exp1~20241022113104.1036)                                | Ubuntu 22.04.1 LTS | GitHub Actions |
+| GCC 4.8.5 (Ubuntu 4.8.5-4ubuntu8)                                                                      | Ubuntu 20.04.4 LTS | GitHub Actions |
+| GCC 4.9.3 (Ubuntu 4.9.3-13ubuntu2)                                                                     | Ubuntu 20.04.4 LTS | GitHub Actions |
+| GCC 4.8.5 (Ubuntu 4.8.5-4ubuntu2)                                                                      | Ubuntu 20.04.4 LTS | GitHub Actions |
+| GCC 5.5.0 (Ubuntu 5.5.0-12ubuntu1)                                                                     | Ubuntu 20.04.4 LTS | GitHub Actions |
+| GCC 6.4.0 (Ubuntu 6.4.0-17ubuntu1)                                                                     | Ubuntu 20.04.4 LTS | GitHub Actions |
+| GCC 7.5.0                                                                                              | Ubuntu 22.04.1 LTS | GitHub Actions |
 | GCC 8.1.0 (i686-posix-dwarf-rev0, Built by MinGW-W64 project)                                          | Windows-10.0.17763 | GitHub Actions |
 | GCC 8.1.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)                                          | Windows-10.0.17763 | GitHub Actions |
-| GCC 8.5.0                                                                                              | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 9.5.0                                                                                              | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 10.4.0                                                                                             | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 11.1.0                                                                                             | Ubuntu (aarch64)   | Drone CI       |
-| GCC 11.3.0                                                                                             | Ubuntu 20.04.3 LTS | GitHub Actions |
-| GCC 12.2.0                                                                                             | Ubuntu 20.04.3 LTS | GitHub Actions |
+| GCC 8.5.0                                                                                              | Ubuntu 22.04.1 LTS | GitHub Actions |
+| GCC 9.5.0                                                                                              | Ubuntu 22.04.1 LTS | GitHub Actions |
+| GCC 10.5.0                                                                                             | Ubuntu 22.04.1 LTS | GitHub Actions |
+| GCC 11.1.0                                                                                             | Ubuntu (aarch64)   | Cirrus CI      |
+| GCC 11.5.0                                                                                             | Ubuntu 22.04.1 LTS | GitHub Actions |
+| GCC 12.4.0                                                                                             | Ubuntu 22.04.1 LTS | GitHub Actions |
 | GCC 13.0.0 20220605 (experimental)                                                                     | Ubuntu 20.04.3 LTS | GitHub Actions |
+| GCC 13.3.0                                                                                             | Ubuntu 22.04.1 LTS | GitHub Actions |
+| GCC 14.2.0                                                                                             | Ubuntu 22.04.1 LTS | GitHub Actions |
 | Intel C++ Compiler 2021.5.0.20211109                                                                   | Ubuntu 20.04.3 LTS | GitHub Actions |
 | NVCC 11.0.221                                                                                          | Ubuntu 20.04.3 LTS | GitHub Actions |
 | Visual Studio 14 2015 MSVC 19.0.24241.7 (Build Engine version 14.0.25420.1)                            | Windows-6.3.9600   | AppVeyor       |
@@ -1263,7 +1298,7 @@ Example:
 ```cmake
 include(FetchContent)
 
-FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
 FetchContent_MakeAvailable(json)
 
 target_link_libraries(foo PRIVATE nlohmann_json::nlohmann_json)
@@ -1328,6 +1363,8 @@ If you are using [cget](https://cget.readthedocs.io/en/latest/), you can install
 
 If you are using [CocoaPods](https://cocoapods.org), you can use the library by adding pod `"nlohmann_json", '~>3.1.2'` to your podfile (see [an example](https://bitbucket.org/benman/nlohmann_json-cocoapod/src/master/)). Please file issues [here](https://bitbucket.org/benman/nlohmann_json-cocoapod/issues?status=new&status=open).
 
+If you are using [Swift Package Manager](https://swift.org/package-manager/), you can use the library by adding a package dependency to this repository. And target dependency as `.product(name: "nlohmann-json", package: "json")`.
+
 If you are using [NuGet](https://www.nuget.org), you can use the package [nlohmann.json](https://www.nuget.org/packages/nlohmann.json/). Please check [this extensive description](https://github.com/nlohmann/json/issues/1132#issuecomment-452250255) on how to use the package. Please file issues [here](https://github.com/hnkb/nlohmann-json-nuget/issues).
 
 If you are using [conda](https://conda.io/), you can use the package [nlohmann_json](https://github.com/conda-forge/nlohmann_json-feedstock) from [conda-forge](https://conda-forge.org) executing `conda install -c conda-forge nlohmann_json`. Please file issues [here](https://github.com/conda-forge/nlohmann_json-feedstock/issues).
@@ -1367,11 +1404,11 @@ json = dependency('nlohmann_json', required: true)
 
 ## License
 
-<img align="right" src="https://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png">
+<img align="right" src="https://149753425.v2.pressablecdn.com/wp-content/uploads/2009/06/OSIApproved_100X125.png" alt="OSI approved license">
 
 The class is licensed under the [MIT License](https://opensource.org/licenses/MIT):
 
-Copyright &copy; 2013-2022 [Niels Lohmann](https://nlohmann.me)
+Copyright &copy; 2013-2024 [Niels Lohmann](https://nlohmann.me)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -1381,13 +1418,19 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 * * *
 
-The class contains the UTF-8 Decoder from Bjoern Hoehrmann which is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2008-2009 [Björn Hoehrmann](https://bjoern.hoehrmann.de/) <bjoern@hoehrmann.de>
+- The class contains the UTF-8 Decoder from Bjoern Hoehrmann which is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2008-2009 [Björn Hoehrmann](https://bjoern.hoehrmann.de/) <bjoern@hoehrmann.de>
+- The class contains a slightly modified version of the Grisu2 algorithm from Florian Loitsch which is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2009 [Florian Loitsch](https://florian.loitsch.com/)
+- The class contains a copy of [Hedley](https://nemequ.github.io/hedley/) from Evan Nemerson which is licensed as [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- The class contains parts of [Google Abseil](https://github.com/abseil/abseil-cpp) which is licensed under the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
 
-The class contains a slightly modified version of the Grisu2 algorithm from Florian Loitsch which is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2009 [Florian Loitsch](https://florian.loitsch.com/)
+<img align="right" src="https://git.fsfe.org/reuse/reuse-ci/raw/branch/master/reuse-horizontal.png" alt="REUSE Software">
 
-The class contains a copy of [Hedley](https://nemequ.github.io/hedley/) from Evan Nemerson which is licensed as [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+The library is compliant to version 3.3 of the [**REUSE specification**](https://reuse.software):
 
-The class contains parts of [Google Abseil](https://github.com/abseil/abseil-cpp) which is licensed under the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
+- Every source file contains an SPDX copyright header.
+- The full text of all licenses used in the repository can be found in the `LICENSES` folder.
+- File `.reuse/dep5` contains an overview of all files' copyrights and licenses.
+- Run `pipx run reuse lint` to verify the project's REUSE compliance and `pipx run reuse spdx` to generate a SPDX SBOM.
 
 ## Contact
 
@@ -1721,6 +1764,36 @@ I deeply appreciate the help of the following people.
 314. [Berkus Decker](https://github.com/berkus) fixed a typo in the README.
 315. [Illia Polishchuk](https://github.com/effolkronium) improved the CMake testing.
 316. [Ikko Ashimine](https://github.com/eltociear) fixed a typo.
+317. [Raphael Grimm](https://github.com/barcode) added the possibility to define a custom base class.
+318. [tocic](https://github.com/tocic) fixed typos in the documentation.
+319. [Vertexwahn](https://github.com/Vertexwahn) added Bazel build support.
+320. [Dirk Stolle](https://github.com/striezel) fixed typos in the documentation.
+321. [DavidKorczynski](https://github.com/DavidKorczynski) added a CIFuzz CI GitHub action.
+322. [Finkman](https://github.com/Finkman) fixed the debug pretty-printer.
+323. [Florian Segginger](https://github.com/floriansegginger) bumped the years in the README.
+324. [haadfida](https://github.com/haadfida) cleaned up the badges of used services.
+325. [Arsen Arsenović](https://github.com/ArsenArsen) fixed a build error.
+326. [theevilone45](https://github.com/theevilone45) fixed a typo in a CMake file.
+327. [Sergei Trofimovich](https://github.com/trofi) fixed the custom allocator support.
+328. [Joyce](https://github.com/joycebrum) fixed some security issues in the GitHub workflows.
+329. [Nicolas Jakob](https://github.com/njakob) add vcpkg version badge.
+330. [Tomerkm](https://github.com/Tomerkm) added tests.
+331. [No.](https://github.com/tusooa) fixed the use of `get<>` calls.
+332. [taro](https://github.com/tarolling) fixed a typo in the `CODEOWNERS` file.
+333. [Ikko Eltociear Ashimine](https://github.com/eltociear) fixed a typo.
+334. [Felix Yan](https://github.com/felixonmars) fixed a typo in the README.
+335. [HO-COOH](https://github.com/HO-COOH) fixed a parentheses in the documentation.
+336. [Ivor Wanders](https://github.com/iwanders) fixed the examples to catch exception by `const&`.
+337. [miny1233](https://github.com/miny1233) fixed a parentheses in the documentation.
+338. [tomalakgeretkal](https://github.com/tomalakgeretkal) fixed a compilation error.
+339. [alferov](https://github.com/ALF-ONE) fixed a compilation error.
+340. [Craig Scott](https://github.com/craigscott-crascit) fixed a deprecation warning in CMake.
+341. [Vyacheslav Zhdanovskiy](https://github.com/ZeronSix) added macros for serialization-only types.
+342. [Mathieu Westphal](https://github.com/mwestphal) fixed typos.
+343. [scribam](https://github.com/scribam) fixed the MinGW workflow.
+344. [Aleksei Sapitskii](https://github.com/aleksproger) added support for Apple's Swift Package Manager.
+345. [Benjamin Buch](https://github.com/bebuch) fixed the installation path in CMake.
+346. [Colby Haskell](https://github.com/colbychaskell) clarified the parse error message in case a file cannot be opened.
 
 Thanks a lot for helping out! Please [let me know](mailto:mail@nlohmann.me) if I forgot someone.
 
@@ -1842,7 +1915,7 @@ json/tests/src/make_test_data_available.hpp:23: FATAL ERROR: REQUIRE( utils::che
 
 In case you have downloaded the library rather than checked out the code via Git, test `cmake_fetch_content_configure` will fail. Please execute `ctest -LE git_required` to skip these tests. See [issue #2189](https://github.com/nlohmann/json/issues/2189) for more information.
 
-Some tests change the installed files and hence make the whole process not reproducible. Please execute `ctest -LE not_reproducible` to skip these tests. See [issue #2324](https://github.com/nlohmann/json/issues/2324) for more information.
+Some tests change the installed files and hence make the whole process not reproducible. Please execute `ctest -LE not_reproducible` to skip these tests. See [issue #2324](https://github.com/nlohmann/json/issues/2324) for more information. Furthermore, assertions must be switched off to ensure reproducible builds (see [discussion 4494](https://github.com/nlohmann/json/discussions/4494)).
 
 Note you need to call `cmake -LE "not_reproducible|git_required"` to exclude both labels. See [issue #2596](https://github.com/nlohmann/json/issues/2596) for more information.
 

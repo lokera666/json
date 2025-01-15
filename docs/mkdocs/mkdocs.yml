@@ -9,7 +9,7 @@ repo_url: https://github.com/nlohmann/json
 edit_uri: edit/develop/docs/mkdocs/docs
 
 # Copyright
-copyright: Copyright &copy; 2013 - 2022 Niels Lohmann
+copyright: Copyright &copy; 2013 - 2024 Niels Lohmann
 
 # Configuration
 theme:
@@ -30,7 +30,8 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-
+  icon:
+    repo: fontawesome/brands/github
   font:
     text: Roboto
     code: JetBrains Mono
@@ -40,6 +41,9 @@ theme:
     - navigation.tabs
     - navigation.indexes
     - navigation.top
+    - content.tabs.link
+    - content.action.edit
+    - content.action.view
 
 nav:
   - Home:
@@ -50,6 +54,7 @@ nav:
     - home/exceptions.md
     - home/releases.md
     - home/design_goals.md
+    - home/customers.md
     - home/sponsors.md
   - Features:
     - features/arbitrary_types.md
@@ -87,6 +92,7 @@ nav:
         - features/types/number_handling.md
   - Integration:
     - integration/index.md
+    - integration/migration_guide.md
     - integration/cmake.md
     - integration/package_managers.md
     - integration/pkg-config.md
@@ -268,6 +274,7 @@ nav:
         - 'JSON_HAS_EXPERIMENTAL_FILESYSTEM': api/macros/json_has_filesystem.md
         - 'JSON_HAS_FILESYSTEM': api/macros/json_has_filesystem.md
         - 'JSON_HAS_RANGES': api/macros/json_has_ranges.md
+        - 'JSON_HAS_STATIC_RTTI': api/macros/json_has_static_rtti.md
         - 'JSON_HAS_THREE_WAY_COMPARISON': api/macros/json_has_three_way_comparison.md
         - 'JSON_NOEXCEPTION': api/macros/json_noexception.md
         - 'JSON_NO_IO': api/macros/json_no_io.md
@@ -278,10 +285,18 @@ nav:
         - 'JSON_USE_GLOBAL_UDLS': api/macros/json_use_global_udls.md
         - 'JSON_USE_IMPLICIT_CONVERSIONS': api/macros/json_use_implicit_conversions.md
         - 'JSON_USE_LEGACY_DISCARDED_VALUE_COMPARISON': api/macros/json_use_legacy_discarded_value_comparison.md
+        - 'NLOHMANN_DEFINE_DERIVED_TYPE_INTRUSIVE': api/macros/nlohmann_define_derived_type.md
+        - 'NLOHMANN_DEFINE_DERIVED_TYPE_INTRUSIVE_WITH_DEFAULT': api/macros/nlohmann_define_derived_type.md
+        - 'NLOHMANN_DEFINE_DERIVED_TYPE_INTRUSIVE_ONLY_SERIALIZE': api/macros/nlohmann_define_derived_type.md
+        - 'NLOHMANN_DEFINE_DERIVED_TYPE_NON_INTRUSIVE': api/macros/nlohmann_define_derived_type.md
+        - 'NLOHMANN_DEFINE_DERIVED_TYPE_NON_INTRUSIVE_WITH_DEFAULT': api/macros/nlohmann_define_derived_type.md
+        - 'NLOHMANN_DEFINE_DERIVED_TYPE_NON_INTRUSIVE_ONLY_SERIALIZE': api/macros/nlohmann_define_derived_type.md
         - 'NLOHMANN_DEFINE_TYPE_INTRUSIVE': api/macros/nlohmann_define_type_intrusive.md
         - 'NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT': api/macros/nlohmann_define_type_intrusive.md
+        - 'NLOHMANN_DEFINE_TYPE_INTRUSIVE_ONLY_SERIALIZE': api/macros/nlohmann_define_type_intrusive.md
         - 'NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE': api/macros/nlohmann_define_type_non_intrusive.md
         - 'NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE_WITH_DEFAULT': api/macros/nlohmann_define_type_non_intrusive.md
+        - 'NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE_ONLY_SERIALIZE': api/macros/nlohmann_define_type_non_intrusive.md
         - 'NLOHMANN_JSON_NAMESPACE': api/macros/nlohmann_json_namespace.md
         - 'NLOHMANN_JSON_NAMESPACE_BEGIN': api/macros/nlohmann_json_namespace_begin.md
         - 'NLOHMANN_JSON_NAMESPACE_END': api/macros/nlohmann_json_namespace_begin.md
@@ -296,8 +311,6 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/nlohmann
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/nlohmann
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/nielslohmann/
     - icon: fontawesome/brands/xing
@@ -323,37 +336,40 @@ markdown_extensions:
   - pymdownx.critic
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.inlinehilite
   - pymdownx.magiclink
   - pymdownx.mark
   #- pymdownx.smartsymbols
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tasklist:
       custom_checkbox: true
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.tilde
   - pymdownx.snippets:
       base_path: docs
       check_paths: true
-  - plantuml_markdown:
-      format: svg
 
 plugins:
-    - search:
-        separator: '[\s\-\.]'
-        lang: en
-    - minify:
-        minify_html: true
-    - git-revision-date-localized
-    - redirects:
-        redirect_maps:
-            'api/basic_json/operator_gtgt.md': api/operator_gtgt.md
-            'api/basic_json/operator_ltlt.md': api/operator_ltlt.md
-            'api/basic_json/operator_literal_json.md': api/operator_literal_json.md
-            'api/basic_json/operator_literal_json_pointer.md': api/operator_literal_json_pointer.md
-            'api/json_pointer/operator_string.md': api/json_pointer/operator_string_t.md
+  - search:
+      separator: '[\s\-\.]'
+      lang: en
+  - minify:
+      minify_html: true
+  - git-revision-date-localized
+  - redirects:
+      redirect_maps:
+          'api/basic_json/operator_gtgt.md': api/operator_gtgt.md
+          'api/basic_json/operator_ltlt.md': api/operator_ltlt.md
+          'api/basic_json/operator_literal_json.md': api/operator_literal_json.md
+          'api/basic_json/operator_literal_json_pointer.md': api/operator_literal_json_pointer.md
+          'api/json_pointer/operator_string.md': api/json_pointer/operator_string_t.md
 
 extra_css:
     - css/custom.css

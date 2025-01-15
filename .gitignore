@@ -39,3 +39,11 @@
 /localhost.pem
 /localhost-key.pem
 /serve_header.yml
+
+# Swift Package Manager build directory
+/.build
+
+/tools/astyle/venv/
+
+# Bazel-related
+MODULE.bazel.lock
